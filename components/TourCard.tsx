@@ -24,7 +24,7 @@ export function TourCard({ locale, destination, cta, details }: TourCardProps) {
         <p className="tour-eyebrow">{destination.eyebrow}</p>
         <h3>{destination.title}</h3>
         <p>{destination.summary}</p>
-        <div className="tour-tags" aria-label="Tour highlights">
+        <div className="tour-tags" aria-label="Destination highlights">
           {destination.bestFor.slice(0, 3).map((tag) => (
             <span key={tag}>{tag}</span>
           ))}

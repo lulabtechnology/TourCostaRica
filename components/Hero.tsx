@@ -17,7 +17,7 @@ export function Hero({ locale, eyebrow, title, subtitle, primary, secondary }: H
         <source media="(max-width: 760px)" srcSet="/images/hero-mobile.webp" />
         <Image
           src="/images/hero-desktop.webp"
-          alt="Arenal volcano, rainforest and water in Costa Rica"
+          alt="Costa Rica rainforest, coastline and nature"
           fill
           priority
           sizes="100vw"
@@ -30,7 +30,7 @@ export function Hero({ locale, eyebrow, title, subtitle, primary, secondary }: H
         <h1>{title}</h1>
         <p className="hero-subtitle">{subtitle}</p>
         <div className="hero-actions">
-          <a className="btn btn-primary" href="#tours">{primary}</a>
+          <a className="btn btn-primary" href="#destinations">{primary}</a>
           <a className="btn btn-ghost" href={whatsappLink(locale)} target="_blank" rel="noreferrer">
             {secondary}
           </a>

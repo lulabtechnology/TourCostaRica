@@ -14,26 +14,25 @@ type HeaderProps = {
 };
 
 export function Header({ locale, labels, currentSlug }: HeaderProps) {
-  const nextLocale: Locale = locale === "es" ? "en" : "es";
-  const switchHref = currentSlug ? `/${nextLocale}/destinations/${currentSlug}` : `/${nextLocale}`;
+  const languageHref = currentSlug ? `/en/destinations/${currentSlug}` : "/en";
 
   return (
     <header className="site-header">
-      <Link className="brand" href={`/${locale}`} aria-label="Costa Rica Premium Adventures">
+      <Link className="brand" href={`/${locale}`} aria-label="Costa Rica Adventures">
         <span className="brand-mark">CR</span>
         <span className="brand-text">Costa Rica<br />Adventures</span>
       </Link>
 
       <nav className="nav-links" aria-label="Main navigation">
         <Link href={`/${locale}`}>{labels.home}</Link>
-        <Link href={`/${locale}#tours`}>{labels.tours}</Link>
+        <Link href={`/${locale}#destinations`}>{labels.tours}</Link>
         <Link href={`/${locale}#planner`}>{labels.planner}</Link>
         <a href={whatsappLink(locale)} target="_blank" rel="noreferrer">{labels.contact}</a>
       </nav>
 
       <div className="header-actions">
-        <Link className="language-switch" href={switchHref} aria-label="Switch language">
-          {locale === "es" ? "EN" : "ES"}
+        <Link className="language-switch" href={languageHref} aria-label="English version">
+          EN
         </Link>
         <a className="header-whatsapp" href={whatsappLink(locale)} target="_blank" rel="noreferrer">
           {labels.whatsapp}

@@ -30,7 +30,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 
 export default async function DestinationDetailPage({ params }: { params: Promise<{ locale: string; slug: string }> }) {
   const { locale: rawLocale, slug } = await params;
-  const locale = (locales.includes(rawLocale as Locale) ? rawLocale : "es") as Locale;
+  const locale = (locales.includes(rawLocale as Locale) ? rawLocale : "en") as Locale;
   const dictionary = getDictionary(locale);
   const destination = getDestination(locale, slug);
 
@@ -51,7 +51,7 @@ export default async function DestinationDetailPage({ params }: { params: Promis
         />
         <div className="destination-hero-shade" />
         <div className="page-shell destination-hero-content">
-          <Link href={`/${locale}#tours`} className="back-link">← {dictionary.destinationPage.back}</Link>
+          <Link href={`/${locale}#destinations`} className="back-link">← {dictionary.destinationPage.back}</Link>
           <p className="eyebrow light">{destination.eyebrow}</p>
           <h1>{destination.title}</h1>
           <p>{destination.summary}</p>
@@ -61,53 +61,40 @@ export default async function DestinationDetailPage({ params }: { params: Promis
         </div>
       </section>
 
-      <section className="destination-content page-shell">
-        <aside className="destination-facts">
-          <div>
-            <span>{dictionary.destinationPage.duration}</span>
-            <strong>{destination.duration}</strong>
-          </div>
-          <div>
-            <span>{dictionary.destinationPage.mood}</span>
-            <strong>{destination.mood}</strong>
-          </div>
-        </aside>
-
+      <section className="destination-content page-shell destination-content-single">
         <div className="destination-detail-grid">
-          <article>
-            <h2>{dictionary.destinationPage.highlights}</h2>
-            <ul className="clean-list">
-              {destination.highlights.map((highlight) => (
-                <li key={highlight}>{highlight}</li>
-              ))}
-            </ul>
-          </article>
-          <article>
-            <h2>{dictionary.destinationPage.activities}</h2>
-            <ul className="clean-list">
-              {destination.activities.map((activity) => (
-                <li key={activity}>{activity}</li>
-              ))}
-            </ul>
-          </article>
           <article className="wide-detail-card">
-            <h2>{dictionary.destinationPage.bestFor}</h2>
-            <div className="destination-tags">
-              {destination.bestFor.map((item) => (
-                <span key={item}>{item}</span>
-              ))}
-            </div>
+            <h2>{dictionary.destinationPage.overview}</h2>
+            <p>{destination.summary}</p>
           </article>
+
+          {destination.sections.map((section) => (
+            <article key={section.title} className={section.items.length > 4 ? "wide-detail-card" : undefined}>
+              <h2>{section.title}</h2>
+              <ul className="clean-list destination-info-list">
+                {section.items.map((item) => (
+                  <li key={`${section.title}-${item.name}`}>
+                    <strong>{item.name}:</strong> {item.description}
+                  </li>
+                ))}
+              </ul>
+            </article>
+          ))}
         </div>
       </section>
 
       <section className="final-cta page-shell">
-        <h2>{locale === "es" ? "¿Quieres armar esta experiencia?" : "Want to build this experience?"}</h2>
-        <p>
-          {locale === "es"
-            ? "Escríbenos por WhatsApp y te ayudamos a adaptar este destino a tus fechas, presupuesto y estilo de viaje."
-            : "Message us on WhatsApp and we will adapt this destination to your dates, budget and travel style."}
-        </p>
+        <p className="eyebrow light">{dictionary.destinationPage.planning}</p>
+        {destination.planningBlocks.map((block) => (
+          <div className="planning-block" key={block.title}>
+            <h2>{block.title}</h2>
+            <ul className="planner-questions compact">
+              {block.questions.map((question) => (
+                <li key={`${block.title}-${question}`}>{question}</li>
+              ))}
+            </ul>
+          </div>
+        ))}
         <a className="btn btn-primary" href={whatsappLink(locale, destination.title)} target="_blank" rel="noreferrer">
           {dictionary.destinationPage.whatsapp}
         </a>

@@ -22,9 +22,8 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 
 export default async function HomePage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale: rawLocale } = await params;
-  const locale = (locales.includes(rawLocale as Locale) ? rawLocale : "es") as Locale;
+  const locale = (locales.includes(rawLocale as Locale) ? rawLocale : "en") as Locale;
   const dictionary = getDictionary(locale);
-  const destinationsBySlug = new Map(dictionary.destinations.map((destination) => [destination.slug, destination]));
 
   return (
     <main>
@@ -44,48 +43,24 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
           <h2>{dictionary.intro.title}</h2>
           <p>{dictionary.intro.body}</p>
         </div>
-        <div className="stats-grid">
-          {dictionary.intro.stats.map((stat) => (
-            <div className="stat" key={stat.label}>
-              <strong>{stat.value}</strong>
-              <span>{stat.label}</span>
-            </div>
-          ))}
-        </div>
       </section>
 
-      <section className="tours-section page-shell" id="tours">
+      <section className="tours-section page-shell" id="destinations">
         <div className="section-heading">
           <p className="eyebrow">{dictionary.tours.eyebrow}</p>
           <h2>{dictionary.tours.title}</h2>
           <p>{dictionary.tours.body}</p>
         </div>
-        <div className="tour-category-list">
-          {dictionary.tourCategories.map((category) => {
-            const categoryDestinations = category.destinations
-              .map((slug) => destinationsBySlug.get(slug))
-              .filter(Boolean);
-
-            return (
-              <section className="tour-category" key={category.title}>
-                <div className="tour-category-heading">
-                  <h3>{category.title}</h3>
-                  <p>{category.body}</p>
-                </div>
-                <div className="tour-grid">
-                  {categoryDestinations.map((destination) => (
-                    <TourCard
-                      key={destination!.slug}
-                      locale={locale}
-                      destination={destination!}
-                      cta={dictionary.tours.cta}
-                      details={dictionary.tours.details}
-                    />
-                  ))}
-                </div>
-              </section>
-            );
-          })}
+        <div className="tour-grid">
+          {dictionary.destinations.map((destination) => (
+            <TourCard
+              key={destination.slug}
+              locale={locale}
+              destination={destination}
+              cta={dictionary.tours.cta}
+              details={dictionary.tours.details}
+            />
+          ))}
         </div>
       </section>
 
@@ -96,21 +71,6 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
         body={dictionary.parallax.body}
         cta={dictionary.parallax.cta}
       />
-
-      <section className="promise-section page-shell">
-        <div className="section-heading align-left">
-          <p className="eyebrow">{dictionary.promise.eyebrow}</p>
-          <h2>{dictionary.promise.title}</h2>
-        </div>
-        <div className="promise-grid">
-          {dictionary.promise.items.map((item) => (
-            <article className="promise-item" key={item.title}>
-              <h3>{item.title}</h3>
-              <p>{item.body}</p>
-            </article>
-          ))}
-        </div>
-      </section>
 
       <section className="planner-section page-shell" id="planner">
         <div className="planner-panel">

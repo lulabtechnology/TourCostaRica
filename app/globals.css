@@ -314,36 +314,6 @@ img {
   text-align: left;
 }
 
-.tour-category-list {
-  display: grid;
-  gap: 72px;
-}
-
-.tour-category {
-  display: grid;
-  gap: 24px;
-}
-
-.tour-category-heading {
-  max-width: 720px;
-}
-
-.tour-category-heading h3 {
-  margin: 0;
-  color: var(--rainforest);
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(2.1rem, 4vw, 4rem);
-  letter-spacing: -0.045em;
-}
-
-.tour-category-heading p {
-  max-width: 620px;
-  margin: 12px 0 0;
-  color: rgba(30, 37, 34, 0.68);
-  font-size: 1.05rem;
-  line-height: 1.7;
-}
-
 .tour-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -908,5 +878,57 @@ img {
   .destination-detail-grid article,
   .final-cta {
     border-radius: 28px;
+  }
+}
+
+/* English informational content update */
+.intro-section {
+  grid-template-columns: minmax(0, 900px);
+  justify-content: center;
+  text-align: center;
+}
+
+.intro-copy {
+  max-width: 900px;
+}
+
+.destination-content-single {
+  display: block;
+}
+
+.destination-info-list li {
+  font-weight: 600;
+  line-height: 1.75;
+}
+
+.destination-info-list strong {
+  color: var(--deep-jungle);
+  font-weight: 950;
+}
+
+.planning-block + .planning-block {
+  margin-top: 38px;
+}
+
+.planner-questions.compact {
+  margin: 18px 0 30px;
+  max-width: 880px;
+}
+
+.planner-questions.compact li {
+  color: rgba(250, 247, 240, 0.86);
+}
+
+.final-cta .btn {
+  margin-top: 8px;
+}
+
+@media (max-width: 760px) {
+  .intro-section {
+    text-align: left;
+  }
+
+  .destination-detail-grid article {
+    padding: 28px;
   }
 }

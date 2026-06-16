@@ -3,8 +3,8 @@ import type { ReactNode } from "react";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Costa Rica Premium Adventures",
-  description: "Private tours and tailor-made Costa Rica travel experiences.",
+  title: "Costa Rica Adventure Activities and Things To Do",
+  description: "Top rated adventure activities, places to visit and planning questions for Costa Rica destinations.",
   icons: {
     icon: "/favicon.ico"
   }
@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="es">
+    <html lang="en">
       <body>{children}</body>
     </html>
   );
