@@ -1,0 +1,44 @@
+import Link from "next/link";
+import { Locale, whatsappLink } from "@/lib/content";
+
+type HeaderProps = {
+  locale: Locale;
+  labels: {
+    home: string;
+    tours: string;
+    planner: string;
+    contact: string;
+    whatsapp: string;
+  };
+  currentSlug?: string;
+};
+
+export function Header({ locale, labels, currentSlug }: HeaderProps) {
+  const nextLocale: Locale = locale === "es" ? "en" : "es";
+  const switchHref = currentSlug ? `/${nextLocale}/destinations/${currentSlug}` : `/${nextLocale}`;
+
+  return (
+    <header className="site-header">
+      <Link className="brand" href={`/${locale}`} aria-label="Costa Rica Premium Adventures">
+        <span className="brand-mark">CR</span>
+        <span className="brand-text">Costa Rica<br />Adventures</span>
+      </Link>
+
+      <nav className="nav-links" aria-label="Main navigation">
+        <Link href={`/${locale}`}>{labels.home}</Link>
+        <Link href={`/${locale}#tours`}>{labels.tours}</Link>
+        <Link href={`/${locale}#planner`}>{labels.planner}</Link>
+        <a href={whatsappLink(locale)} target="_blank" rel="noreferrer">{labels.contact}</a>
+      </nav>
+
+      <div className="header-actions">
+        <Link className="language-switch" href={switchHref} aria-label="Switch language">
+          {locale === "es" ? "EN" : "ES"}
+        </Link>
+        <a className="header-whatsapp" href={whatsappLink(locale)} target="_blank" rel="noreferrer">
+          {labels.whatsapp}
+        </a>
+      </div>
+    </header>
+  );
+}
