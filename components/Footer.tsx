@@ -22,6 +22,12 @@ export function Footer({ locale, tagline, rights }: FooterProps) {
       </div>
       <div className="page-shell footer-bottom">
         <small>© {new Date().getFullYear()} Costa Rica Adventures. {rights}</small>
+        <small className="footer-credit">
+          {locale === "es" ? "Desarrollado por " : "Developed by "}
+          <a href="https://lulabtech.com" target="_blank" rel="noopener">
+            Lulab Technology
+          </a>
+        </small>
       </div>
     </footer>
   );

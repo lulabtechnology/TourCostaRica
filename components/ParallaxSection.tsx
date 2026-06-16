@@ -37,12 +37,13 @@ export function ParallaxSection({ locale, eyebrow, title, body, cta }: ParallaxS
       if (rect.bottom < 0 || rect.top > viewportHeight) return;
 
       const isMobile = window.matchMedia("(max-width: 760px)").matches;
-      const progress = (viewportHeight - rect.top) / (viewportHeight + rect.height) - 0.5;
-      const distance = isMobile ? 120 : 150;
-      const scale = isMobile ? 1.22 : 1.14;
-      const translateY = progress * distance;
+      const rawProgress = (viewportHeight - rect.top) / (viewportHeight + rect.height);
+      const progress = Math.max(0, Math.min(1, rawProgress));
+      const distance = isMobile ? Math.min(420, viewportHeight * 0.46) : 190;
+      const translateY = (progress - 0.5) * distance;
 
-      picture.style.transform = `translate3d(0, ${translateY}px, 0) scale(${scale})`;
+      picture.style.setProperty("--parallax-y", `${translateY}px`);
+      picture.style.setProperty("--parallax-scale", isMobile ? "1.08" : "1.06");
     };
 
     const requestUpdate = () => {
@@ -53,11 +54,13 @@ export function ParallaxSection({ locale, eyebrow, title, body, cta }: ParallaxS
     updateParallax();
     window.addEventListener("scroll", requestUpdate, { passive: true });
     window.addEventListener("resize", requestUpdate);
+    window.addEventListener("orientationchange", requestUpdate);
 
     return () => {
       if (frame) window.cancelAnimationFrame(frame);
       window.removeEventListener("scroll", requestUpdate);
       window.removeEventListener("resize", requestUpdate);
+      window.removeEventListener("orientationchange", requestUpdate);
     };
   }, []);
 

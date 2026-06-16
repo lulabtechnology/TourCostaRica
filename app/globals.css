@@ -439,10 +439,10 @@ img {
 
 .parallax-picture {
   position: absolute;
-  inset: -12% 0;
+  inset: -18% 0;
   z-index: -2;
   display: block;
-  transform: translate3d(0, 0, 0) scale(1.14);
+  transform: translate3d(0, var(--parallax-y, 0px), 0) scale(var(--parallax-scale, 1.06));
   transform-origin: center;
   will-change: transform;
 }
@@ -581,10 +581,22 @@ img {
 }
 
 .footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
   margin-top: 52px;
   padding-top: 24px;
   border-top: 1px solid rgba(250, 247, 240, 0.12);
   color: rgba(250, 247, 240, 0.55);
+}
+
+.footer-credit a {
+  color: var(--sand);
+  font-weight: 900;
+}
+
+.footer-credit a:hover {
+  color: var(--ocean);
 }
 
 .destination-hero {
@@ -821,13 +833,17 @@ img {
   }
 
   .parallax-section {
-    min-height: 82vh;
+    min-height: 88svh;
     align-items: end;
   }
 
   .parallax-picture {
-    inset: -24% 0;
-    transform: translate3d(0, 0, 0) scale(1.22);
+    inset: -58% 0;
+    transform: translate3d(0, var(--parallax-y, 0px), 0) scale(var(--parallax-scale, 1.08));
+  }
+
+  .parallax-image {
+    object-position: center center;
   }
 
   .parallax-shade {
@@ -853,6 +869,10 @@ img {
 
   .footer-contact {
     text-align: left;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
   }
 
   .destination-hero {
