@@ -428,7 +428,7 @@ img {
 
 .parallax-section {
   position: relative;
-  min-height: 84vh;
+  min-height: 88vh;
   display: grid;
   align-items: center;
   color: var(--off-white);
@@ -437,18 +437,17 @@ img {
   background: var(--deep-jungle);
 }
 
-.parallax-picture {
+.parallax-background {
   position: absolute;
-  inset: -18% 0;
+  inset: -22% 0;
   z-index: -2;
-  display: block;
-  transform: translate3d(0, var(--parallax-y, 0px), 0) scale(var(--parallax-scale, 1.06));
-  transform-origin: center;
+  background-image: url("/images/parallax-desktop.webp");
+  background-size: cover;
+  background-position: center center;
+  transform: translate3d(0, var(--parallax-y, 0px), 0) scale(var(--parallax-scale, 1.12));
+  transform-origin: center center;
   will-change: transform;
-}
-
-.parallax-image {
-  object-fit: cover;
+  filter: saturate(1.18) contrast(1.07) brightness(1.04);
 }
 
 .parallax-shade {
@@ -456,14 +455,15 @@ img {
   inset: 0;
   z-index: -1;
   background:
-    linear-gradient(90deg, rgba(6, 31, 26, 0.88), rgba(6, 31, 26, 0.4), rgba(6, 31, 26, 0.1)),
-    linear-gradient(180deg, rgba(6, 31, 26, 0.08), rgba(6, 31, 26, 0.52));
+    linear-gradient(90deg, rgba(6, 31, 26, 0.58) 0%, rgba(6, 31, 26, 0.2) 52%, rgba(6, 31, 26, 0.04) 100%),
+    linear-gradient(180deg, rgba(6, 31, 26, 0.06) 0%, rgba(6, 31, 26, 0.42) 100%);
 }
 
 .parallax-content {
   position: relative;
   z-index: 1;
   padding: 100px 0;
+  text-shadow: 0 18px 42px rgba(0, 0, 0, 0.34);
 }
 
 .parallax-section h2 {
@@ -833,23 +833,22 @@ img {
   }
 
   .parallax-section {
-    min-height: 88svh;
+    min-height: 94svh;
     align-items: end;
   }
 
-  .parallax-picture {
-    inset: -58% 0;
-    transform: translate3d(0, var(--parallax-y, 0px), 0) scale(var(--parallax-scale, 1.08));
-  }
-
-  .parallax-image {
-    object-position: center center;
+  .parallax-background {
+    inset: -76% 0;
+    background-image: url("/images/parallax-mobile.webp");
+    background-position: center center;
+    transform: translate3d(0, var(--parallax-y, 0px), 0) scale(var(--parallax-scale, 1.2));
+    filter: saturate(1.22) contrast(1.08) brightness(1.05);
   }
 
   .parallax-shade {
     background:
-      linear-gradient(180deg, rgba(6, 31, 26, 0.28), rgba(6, 31, 26, 0.9)),
-      linear-gradient(90deg, rgba(6, 31, 26, 0.58), rgba(6, 31, 26, 0.08));
+      linear-gradient(180deg, rgba(6, 31, 26, 0.16) 0%, rgba(6, 31, 26, 0.26) 42%, rgba(6, 31, 26, 0.78) 100%),
+      linear-gradient(90deg, rgba(6, 31, 26, 0.42) 0%, rgba(6, 31, 26, 0.04) 100%);
   }
 
   .parallax-content {

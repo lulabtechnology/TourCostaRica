@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { useEffect, useRef } from "react";
 import { Locale, whatsappLink } from "@/lib/content";
 
@@ -14,7 +13,7 @@ type ParallaxSectionProps = {
 
 export function ParallaxSection({ locale, eyebrow, title, body, cta }: ParallaxSectionProps) {
   const sectionRef = useRef<HTMLElement | null>(null);
-  const pictureRef = useRef<HTMLPictureElement | null>(null);
+  const backgroundRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -27,9 +26,9 @@ export function ParallaxSection({ locale, eyebrow, title, body, cta }: ParallaxS
       frame = 0;
 
       const section = sectionRef.current;
-      const picture = pictureRef.current;
+      const background = backgroundRef.current;
 
-      if (!section || !picture) return;
+      if (!section || !background) return;
 
       const rect = section.getBoundingClientRect();
       const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
@@ -39,11 +38,15 @@ export function ParallaxSection({ locale, eyebrow, title, body, cta }: ParallaxS
       const isMobile = window.matchMedia("(max-width: 760px)").matches;
       const rawProgress = (viewportHeight - rect.top) / (viewportHeight + rect.height);
       const progress = Math.max(0, Math.min(1, rawProgress));
-      const distance = isMobile ? Math.min(420, viewportHeight * 0.46) : 190;
+
+      // Desktop and mobile both use real transform movement.
+      // Mobile receives a stronger range because background-attachment: fixed
+      // is unreliable on iOS/Android and subtle movement gets lost on small screens.
+      const distance = isMobile ? Math.min(820, viewportHeight * 0.88) : Math.min(380, viewportHeight * 0.38);
       const translateY = (progress - 0.5) * distance;
 
-      picture.style.setProperty("--parallax-y", `${translateY}px`);
-      picture.style.setProperty("--parallax-scale", isMobile ? "1.08" : "1.06");
+      background.style.setProperty("--parallax-y", `${translateY}px`);
+      background.style.setProperty("--parallax-scale", isMobile ? "1.2" : "1.12");
     };
 
     const requestUpdate = () => {
@@ -66,16 +69,7 @@ export function ParallaxSection({ locale, eyebrow, title, body, cta }: ParallaxS
 
   return (
     <section className="parallax-section" ref={sectionRef}>
-      <picture className="parallax-picture" ref={pictureRef} aria-hidden="true">
-        <source media="(max-width: 760px)" srcSet="/images/parallax-mobile.webp" />
-        <Image
-          src="/images/parallax-desktop.webp"
-          alt=""
-          fill
-          sizes="100vw"
-          className="parallax-image"
-        />
-      </picture>
+      <div className="parallax-background" ref={backgroundRef} aria-hidden="true" />
       <div className="parallax-shade" />
       <div className="page-shell parallax-content">
         <p className="eyebrow light">{eyebrow}</p>
