@@ -314,6 +314,36 @@ img {
   text-align: left;
 }
 
+.tour-category-list {
+  display: grid;
+  gap: 72px;
+}
+
+.tour-category {
+  display: grid;
+  gap: 24px;
+}
+
+.tour-category-heading {
+  max-width: 720px;
+}
+
+.tour-category-heading h3 {
+  margin: 0;
+  color: var(--rainforest);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(2.1rem, 4vw, 4rem);
+  letter-spacing: -0.045em;
+}
+
+.tour-category-heading p {
+  max-width: 620px;
+  margin: 12px 0 0;
+  color: rgba(30, 37, 34, 0.68);
+  font-size: 1.05rem;
+  line-height: 1.7;
+}
+
 .tour-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));

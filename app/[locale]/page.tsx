@@ -24,6 +24,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
   const { locale: rawLocale } = await params;
   const locale = (locales.includes(rawLocale as Locale) ? rawLocale : "es") as Locale;
   const dictionary = getDictionary(locale);
+  const destinationsBySlug = new Map(dictionary.destinations.map((destination) => [destination.slug, destination]));
 
   return (
     <main>
@@ -59,16 +60,32 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
           <h2>{dictionary.tours.title}</h2>
           <p>{dictionary.tours.body}</p>
         </div>
-        <div className="tour-grid">
-          {dictionary.destinations.map((destination) => (
-            <TourCard
-              key={destination.slug}
-              locale={locale}
-              destination={destination}
-              cta={dictionary.tours.cta}
-              details={dictionary.tours.details}
-            />
-          ))}
+        <div className="tour-category-list">
+          {dictionary.tourCategories.map((category) => {
+            const categoryDestinations = category.destinations
+              .map((slug) => destinationsBySlug.get(slug))
+              .filter(Boolean);
+
+            return (
+              <section className="tour-category" key={category.title}>
+                <div className="tour-category-heading">
+                  <h3>{category.title}</h3>
+                  <p>{category.body}</p>
+                </div>
+                <div className="tour-grid">
+                  {categoryDestinations.map((destination) => (
+                    <TourCard
+                      key={destination!.slug}
+                      locale={locale}
+                      destination={destination!}
+                      cta={dictionary.tours.cta}
+                      details={dictionary.tours.details}
+                    />
+                  ))}
+                </div>
+              </section>
+            );
+          })}
         </div>
       </section>
 
