@@ -427,19 +427,42 @@ img {
 }
 
 .parallax-section {
+  position: relative;
   min-height: 84vh;
   display: grid;
   align-items: center;
   color: var(--off-white);
-  background-image:
+  overflow: hidden;
+  isolation: isolate;
+  background: var(--deep-jungle);
+}
+
+.parallax-picture {
+  position: absolute;
+  inset: -12% 0;
+  z-index: -2;
+  display: block;
+  transform: translate3d(0, 0, 0) scale(1.14);
+  transform-origin: center;
+  will-change: transform;
+}
+
+.parallax-image {
+  object-fit: cover;
+}
+
+.parallax-shade {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
     linear-gradient(90deg, rgba(6, 31, 26, 0.88), rgba(6, 31, 26, 0.4), rgba(6, 31, 26, 0.1)),
-    var(--parallax-desktop);
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
+    linear-gradient(180deg, rgba(6, 31, 26, 0.08), rgba(6, 31, 26, 0.52));
 }
 
 .parallax-content {
+  position: relative;
+  z-index: 1;
   padding: 100px 0;
 }
 
@@ -799,11 +822,18 @@ img {
 
   .parallax-section {
     min-height: 82vh;
-    background-image:
-      linear-gradient(180deg, rgba(6, 31, 26, 0.36), rgba(6, 31, 26, 0.86)),
-      var(--parallax-mobile);
-    background-attachment: scroll;
-    background-position: center;
+    align-items: end;
+  }
+
+  .parallax-picture {
+    inset: -24% 0;
+    transform: translate3d(0, 0, 0) scale(1.22);
+  }
+
+  .parallax-shade {
+    background:
+      linear-gradient(180deg, rgba(6, 31, 26, 0.28), rgba(6, 31, 26, 0.9)),
+      linear-gradient(90deg, rgba(6, 31, 26, 0.58), rgba(6, 31, 26, 0.08));
   }
 
   .parallax-content {
