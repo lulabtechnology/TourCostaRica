@@ -21,7 +21,7 @@ export function TourCard({ locale, destination, cta, details }: TourCardProps) {
       />
       <div className="tour-card-shade" />
       <div className="tour-card-content">
-        <p className="tour-eyebrow">{destination.eyebrow}</p>
+        <p className="tour-eyebrow">{destination.region}</p>
         <h3>{destination.title}</h3>
         <p>{destination.summary}</p>
         <div className="tour-tags" aria-label="Destination highlights">

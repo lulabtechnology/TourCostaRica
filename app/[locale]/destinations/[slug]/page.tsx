@@ -52,7 +52,7 @@ export default async function DestinationDetailPage({ params }: { params: Promis
         <div className="destination-hero-shade" />
         <div className="page-shell destination-hero-content">
           <Link href={`/${locale}#destinations`} className="back-link">← {dictionary.destinationPage.back}</Link>
-          <p className="eyebrow light">{destination.eyebrow}</p>
+          <p className="eyebrow light">{destination.region}</p>
           <h1>{destination.title}</h1>
           <p>{destination.summary}</p>
           <a className="btn btn-primary" href={whatsappLink(locale, destination.title)} target="_blank" rel="noreferrer">

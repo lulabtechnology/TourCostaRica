@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { ConciergeSection } from "@/components/ConciergeSection";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { Hero } from "@/components/Hero";
@@ -39,7 +40,6 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
 
       <section className="intro-section page-shell">
         <div className="intro-copy">
-          <p className="eyebrow">{dictionary.intro.eyebrow}</p>
           <h2>{dictionary.intro.title}</h2>
           <p>{dictionary.intro.body}</p>
         </div>
@@ -71,6 +71,8 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
         body={dictionary.parallax.body}
         cta={dictionary.parallax.cta}
       />
+
+      <ConciergeSection locale={locale} content={dictionary.concierge} />
 
       <section className="planner-section page-shell" id="planner">
         <div className="planner-panel">

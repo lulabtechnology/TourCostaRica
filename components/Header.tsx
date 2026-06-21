@@ -6,7 +6,7 @@ type HeaderProps = {
   labels: {
     home: string;
     tours: string;
-    planner: string;
+    concierge: string;
     contact: string;
     whatsapp: string;
   };
@@ -26,7 +26,7 @@ export function Header({ locale, labels, currentSlug }: HeaderProps) {
       <nav className="nav-links" aria-label="Main navigation">
         <Link href={`/${locale}`}>{labels.home}</Link>
         <Link href={`/${locale}#destinations`}>{labels.tours}</Link>
-        <Link href={`/${locale}#planner`}>{labels.planner}</Link>
+        <Link href={`/${locale}#concierge`}>{labels.concierge}</Link>
         <a href={whatsappLink(locale)} target="_blank" rel="noreferrer">{labels.contact}</a>
       </nav>
 
