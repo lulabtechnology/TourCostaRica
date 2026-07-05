@@ -1,7 +1,7 @@
 "use client";
 
 import { CSSProperties, useEffect, useRef } from "react";
-import { Locale, whatsappLink } from "@/lib/content";
+import { CONTACT_LINK, Locale, whatsappLink } from "@/lib/content";
 
 type ParallaxSectionProps = {
   locale: Locale;
@@ -9,9 +9,10 @@ type ParallaxSectionProps = {
   title: string;
   body: string;
   cta: string;
+  contact: string;
 };
 
-export function ParallaxSection({ locale, eyebrow, title, body, cta }: ParallaxSectionProps) {
+export function ParallaxSection({ locale, eyebrow, title, body, cta, contact }: ParallaxSectionProps) {
   const sectionRef = useRef<HTMLElement | null>(null);
   const mobileMediaRef = useRef<HTMLDivElement | null>(null);
 
@@ -74,9 +75,14 @@ export function ParallaxSection({ locale, eyebrow, title, body, cta }: ParallaxS
         <p className="eyebrow light">{eyebrow}</p>
         <h2>{title}</h2>
         <p>{body}</p>
-        <a className="btn btn-primary" href={whatsappLink(locale)} target="_blank" rel="noreferrer">
-          {cta}
-        </a>
+        <div className="cta-actions">
+          <a className="btn btn-primary" href={whatsappLink(locale)} target="_blank" rel="noreferrer">
+            {cta}
+          </a>
+          <a className="btn btn-ghost" href={CONTACT_LINK}>
+            {contact}
+          </a>
+        </div>
       </div>
     </section>
   );

@@ -213,6 +213,13 @@ img {
   margin-top: 34px;
 }
 
+.cta-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 20px;
+}
+
 .btn {
   display: inline-flex;
   min-height: 52px;
@@ -696,6 +703,11 @@ img {
   font-weight: 900;
 }
 
+.footer-phone-list {
+  display: grid;
+  gap: 8px;
+}
+
 .footer-bottom {
   display: flex;
   justify-content: space-between;
@@ -933,6 +945,10 @@ img {
   }
 
   .hero-actions {
+    display: grid;
+  }
+
+  .cta-actions {
     display: grid;
   }
 

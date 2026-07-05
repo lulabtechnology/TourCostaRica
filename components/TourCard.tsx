@@ -1,15 +1,16 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Destination, Locale, whatsappLink } from "@/lib/content";
+import { CONTACT_LINK, Destination, Locale, whatsappLink } from "@/lib/content";
 
 type TourCardProps = {
   locale: Locale;
   destination: Destination;
   cta: string;
+  contact: string;
   details: string;
 };
 
-export function TourCard({ locale, destination, cta, details }: TourCardProps) {
+export function TourCard({ locale, destination, cta, contact, details }: TourCardProps) {
   return (
     <article className="tour-card">
       <Image
@@ -35,6 +36,9 @@ export function TourCard({ locale, destination, cta, details }: TourCardProps) {
           </Link>
           <a className="card-whatsapp" href={whatsappLink(locale, destination.title)} target="_blank" rel="noreferrer">
             {cta}
+          </a>
+          <a className="card-link" href={CONTACT_LINK}>
+            {contact}
           </a>
         </div>
       </div>

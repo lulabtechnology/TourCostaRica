@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { Dictionary, Locale, whatsappLink } from "@/lib/content";
+import { CONTACT_LINK, Dictionary, Locale } from "@/lib/content";
 
 type ConciergeSectionProps = {
   locale: Locale;
@@ -58,7 +58,7 @@ export function ConciergeSection({ locale, content }: ConciergeSectionProps) {
           </div>
           <div>
             <p>{content.advantageBody}</p>
-            <a className="btn btn-primary" href={whatsappLink(locale, "Concierge Services")} target="_blank" rel="noreferrer">
+            <a className="btn btn-primary" href={CONTACT_LINK}>
               {content.cta}
             </a>
           </div>

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Locale, whatsappLink } from "@/lib/content";
+import { CONTACT_LINK, Locale, whatsappLink } from "@/lib/content";
 
 type HeaderProps = {
   locale: Locale;
@@ -27,7 +27,7 @@ export function Header({ locale, labels, currentSlug }: HeaderProps) {
         <Link href={`/${locale}`}>{labels.home}</Link>
         <Link href={`/${locale}#destinations`}>{labels.tours}</Link>
         <Link href={`/${locale}#concierge`}>{labels.concierge}</Link>
-        <a href={whatsappLink(locale)} target="_blank" rel="noreferrer">{labels.contact}</a>
+        <a href={CONTACT_LINK}>{labels.contact}</a>
       </nav>
 
       <div className="header-actions">

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Locale, WHATSAPP_NUMBER, whatsappLink } from "@/lib/content";
+import { Locale, PHONE_CONTACTS, whatsappLink } from "@/lib/content";
 
 type FooterProps = {
   locale: Locale;
@@ -17,7 +17,13 @@ export function Footer({ locale, tagline, rights }: FooterProps) {
         </div>
         <div className="footer-contact">
           <span>WhatsApp</span>
-          <a href={whatsappLink(locale)} target="_blank" rel="noreferrer">+{WHATSAPP_NUMBER.slice(0, 3)} {WHATSAPP_NUMBER.slice(3, 7)}-{WHATSAPP_NUMBER.slice(7)}</a>
+          <div className="footer-phone-list">
+            {PHONE_CONTACTS.map((phone) => (
+              <a key={`${phone.country}-${phone.label}`} href={whatsappLink(locale, undefined, phone.whatsappNumber)} target="_blank" rel="noreferrer">
+                {phone.country}: {phone.label}
+              </a>
+            ))}
+          </div>
         </div>
       </div>
       <div className="page-shell footer-bottom">

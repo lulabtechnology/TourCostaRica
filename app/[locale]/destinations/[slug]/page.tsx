@@ -4,7 +4,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
-import { getDestination, getDictionary, Locale, locales, whatsappLink } from "@/lib/content";
+import { CONTACT_LINK, getDestination, getDictionary, Locale, locales, whatsappLink } from "@/lib/content";
 
 export function generateStaticParams() {
   return locales.flatMap((locale) =>
@@ -55,9 +55,14 @@ export default async function DestinationDetailPage({ params }: { params: Promis
           <p className="eyebrow light">{destination.region}</p>
           <h1>{destination.title}</h1>
           <p>{destination.summary}</p>
-          <a className="btn btn-primary" href={whatsappLink(locale, destination.title)} target="_blank" rel="noreferrer">
-            {dictionary.destinationPage.whatsapp}
-          </a>
+          <div className="cta-actions">
+            <a className="btn btn-primary" href={whatsappLink(locale, destination.title)} target="_blank" rel="noreferrer">
+              {dictionary.destinationPage.whatsapp}
+            </a>
+            <a className="btn btn-ghost" href={CONTACT_LINK}>
+              {dictionary.destinationPage.contact}
+            </a>
+          </div>
         </div>
       </section>
 
@@ -95,9 +100,14 @@ export default async function DestinationDetailPage({ params }: { params: Promis
             </ul>
           </div>
         ))}
-        <a className="btn btn-primary" href={whatsappLink(locale, destination.title)} target="_blank" rel="noreferrer">
-          {dictionary.destinationPage.whatsapp}
-        </a>
+        <div className="cta-actions">
+          <a className="btn btn-primary" href={whatsappLink(locale, destination.title)} target="_blank" rel="noreferrer">
+            {dictionary.destinationPage.whatsapp}
+          </a>
+          <a className="btn btn-ghost" href={CONTACT_LINK}>
+            {dictionary.destinationPage.contact}
+          </a>
+        </div>
       </section>
 
       <Footer locale={locale} tagline={dictionary.footer.tagline} rights={dictionary.footer.rights} />

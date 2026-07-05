@@ -2,6 +2,13 @@ export const locales = ["en", "es"] as const;
 export type Locale = (typeof locales)[number];
 
 export const WHATSAPP_NUMBER = "50763562486";
+export const CONTACT_EMAIL = "Info@costaricatravelandliving.com";
+export const CONTACT_LINK = `mailto:${CONTACT_EMAIL}`;
+export const PHONE_CONTACTS = [
+  { country: "Costa Rica", label: "+506 7024-7832", whatsappNumber: "50670247832" },
+  { country: "Costa Rica", label: "+506 6151-0310", whatsappNumber: "50661510310" },
+  { country: "Panamá", label: "+507 6356-2486", whatsappNumber: WHATSAPP_NUMBER }
+] as const;
 
 export type DestinationItem = { name: string; description: string };
 export type DestinationSection = {
@@ -45,14 +52,15 @@ export type Dictionary = {
     secondary: string;
   };
   intro: { title: string; body: string };
-  tours: { eyebrow: string; title: string; body: string; cta: string; details: string };
-  parallax: { eyebrow: string; title: string; body: string; cta: string };
+  tours: { eyebrow: string; title: string; body: string; cta: string; contact: string; details: string };
+  parallax: { eyebrow: string; title: string; body: string; cta: string; contact: string };
   planner: {
     eyebrow: string;
     title: string;
     body: string;
     questions: string[];
     cta: string;
+    contact: string;
   };
   concierge: {
     title: string;
@@ -65,7 +73,7 @@ export type Dictionary = {
     advantageBody: string;
     cta: string;
   };
-  destinationPage: { back: string; overview: string; whatsapp: string; planning: string };
+  destinationPage: { back: string; overview: string; whatsapp: string; contact: string; planning: string };
   footer: { tagline: string; rights: string };
   destinations: Destination[];
 };
@@ -454,7 +462,7 @@ const englishDictionary: Dictionary = {
     title: "Live the Pura Vida Vibe.",
     subtitle: "Imagine waking up to the call of howler monkeys, spending your afternoons under roaring waterfalls, and ending the day watching the sunset dip below the ocean horizon. Costa Rica isn't just a destination on a map; it’s an awakening of the senses.",
     primary: "Explore Destinations",
-    secondary: "Ask on WhatsApp"
+    secondary: "WhatsApp"
   },
   intro: {
     title: "Experience our country deeply and authentically.",
@@ -463,27 +471,30 @@ const englishDictionary: Dictionary = {
   tours: {
     eyebrow: "Costa Rica destinations",
     title: "Explore by region",
-    body: "Choose a destination to see its attractions, tours, experiences and planning questions.",
-    cta: "Ask on WhatsApp",
+    body: "Choose a destination to see its attractions, tours, and local experiences. Feel free to write to us with your planning questions and let us take care of the rest for you!",
+    cta: "WhatsApp",
+    contact: "Contact",
     details: "Explore destination"
   },
   parallax: {
     eyebrow: "Need help Planning Your Itinerary?",
     title: "Please answer the following Questions",
     body: "Our Costa Rica experts Will create the perfect Local experiencies for your Dream Costa Rica vacation.",
-    cta: "Ask on WhatsApp"
+    cta: "WhatsApp",
+    contact: "Contact"
   },
   planner: {
     eyebrow: "Planning Questions",
     title: "Need help Planning Your Itinerary?",
-    body: "Please answer the following Questions And our Costa Rica experts Will create the perfect Local experiencies for your Dream Costa Rica vacation.",
+    body: "Please answer the following Questions And our Costa Rica experts Will create the perfect Local experiencies for your Dream Costa Rica trip.",
     questions: generalQuestions,
-    cta: "Send answers on WhatsApp"
+    cta: "WhatsApp",
+    contact: "Contact"
   },
   concierge: {
     title: "Concierge Services",
     subtitle: "Your Costa Rica Transition, Mastered.",
-    intro: "Moving to paradise shouldn't feel like a leap into the unknown. At Costa Rica Adventures, we transform the complexities of international relocation and real estate acquisition into a seamless, stress-free journey. From sourcing off-market luxury estates to navigating local legalities, residency, and lifestyle logistics, our dedicated concierge team acts as your trusted boots on the ground.",
+    intro: "Moving to paradise shouldn't feel like a leap into the unknown. At Costa Rica travel and living, we transform the complexities of international relocation and real estate acquisition into a seamless, stress-free journey. From sourcing off-market luxury estates to navigating local legalities, residency, and lifestyle logistics, our dedicated concierge team acts as your trusted boots on the ground.",
     statement: "We don't just help you find a house; we curate your new life under the sun.",
     signatureTitle: "Our Signature Concierge Services",
     services: conciergeServices,
@@ -494,7 +505,8 @@ const englishDictionary: Dictionary = {
   destinationPage: {
     back: "Back to Destinations",
     overview: "Overview",
-    whatsapp: "Ask on WhatsApp",
+    whatsapp: "WhatsApp",
+    contact: "Contact",
     planning: "Planning Questions"
   },
   footer: {
@@ -517,9 +529,9 @@ export function getDestination(locale: string, slug: string): Destination | unde
   return getDictionary(locale).destinations.find((destination) => destination.slug === slug);
 }
 
-export function whatsappLink(locale: Locale, subject?: string) {
+export function whatsappLink(locale: Locale, subject?: string, number = WHATSAPP_NUMBER) {
   const text = subject
     ? `Hello! I want more information about ${subject}.`
     : "Hello! I need help planning my Costa Rica experience.";
-  return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;
+  return `https://wa.me/${number}?text=${encodeURIComponent(text)}`;
 }

@@ -5,7 +5,7 @@ import { Header } from "@/components/Header";
 import { Hero } from "@/components/Hero";
 import { ParallaxSection } from "@/components/ParallaxSection";
 import { TourCard } from "@/components/TourCard";
-import { getDictionary, Locale, locales, whatsappLink } from "@/lib/content";
+import { CONTACT_LINK, getDictionary, Locale, locales, whatsappLink } from "@/lib/content";
 
 export function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
@@ -58,6 +58,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
               locale={locale}
               destination={destination}
               cta={dictionary.tours.cta}
+              contact={dictionary.tours.contact}
               details={dictionary.tours.details}
             />
           ))}
@@ -70,6 +71,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
         title={dictionary.parallax.title}
         body={dictionary.parallax.body}
         cta={dictionary.parallax.cta}
+        contact={dictionary.parallax.contact}
       />
 
       <ConciergeSection locale={locale} content={dictionary.concierge} />
@@ -86,9 +88,14 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
               <li key={question}>{question}</li>
             ))}
           </ul>
-          <a className="btn btn-primary" href={whatsappLink(locale)} target="_blank" rel="noreferrer">
-            {dictionary.planner.cta}
-          </a>
+          <div className="cta-actions">
+            <a className="btn btn-primary" href={whatsappLink(locale)} target="_blank" rel="noreferrer">
+              {dictionary.planner.cta}
+            </a>
+            <a className="btn btn-ghost" href={CONTACT_LINK}>
+              {dictionary.planner.contact}
+            </a>
+          </div>
         </div>
       </section>
 
