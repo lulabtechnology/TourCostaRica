@@ -23,8 +23,10 @@ los nuevos assets para preservar exactamente el nombre de la marca.
 
 ## Hero de video
 
-El prompt completo está en `gemini-hero-prompt.txt`. Tras generar y aprobar el
-video, guardarlo en `public/videos/costa-rica-hero.mp4` y volver a desplegar.
+El video Gemini proporcionado por el propietario ya está incorporado en
+`public/videos/costa-rica-hero.mp4`: H.264, 1280 × 720, 24 fps, 10 segundos,
+sin pista de audio y con inicio rápido. Se optimizó de 8,06 MB a 2,46 MB.
+El prompt de referencia se conserva en `gemini-hero-prompt.txt`.
 El hero conserva la imagen cuando no existe el archivo, falla la reproducción,
 se usa ahorro de datos o se solicita reducir movimiento. El video se silencia,
 se repite y se pausa al salir de pantalla. Incluye control accesible de pausa.
