@@ -1,8 +1,9 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import type { Locale } from "@/lib/content";
 
-export function HeroVideo({ src }: { src: string }) {
+export function HeroVideo({ src, locale }: { src: string; locale: Locale }) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const userPaused = useRef(false);
   const [enabled, setEnabled] = useState(false);
@@ -60,7 +61,7 @@ export function HeroVideo({ src }: { src: string }) {
     {ready && <button
       className="hero-video-toggle"
       type="button"
-      aria-label={playing ? "Pause background video" : "Play background video"}
+      aria-label={locale === "es" ? playing ? "Pausar video de portada" : "Reproducir video de portada" : playing ? "Pause background video" : "Play background video"}
       onClick={() => {
         const video = videoRef.current;
         if (!video) return;

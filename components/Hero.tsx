@@ -20,19 +20,19 @@ export function Hero({ locale, eyebrow, title, subtitle, primary, secondary }: H
     : undefined;
 
   return (
-    <section className="hero" aria-label="Costa Rica hero image">
+    <section className="hero" aria-label={locale === "es" ? "Portada de Costa Rica" : "Costa Rica hero image"}>
       <picture className="hero-picture">
         <source media="(max-width: 760px)" srcSet="/images/hero-editorial-mobile.webp" />
         <Image
           src="/images/hero-editorial-desktop.webp"
-          alt="Costa Rica rainforest, coastline and nature"
+          alt={locale === "es" ? "Selva tropical, costa y naturaleza de Costa Rica" : "Costa Rica rainforest, coastline and nature"}
           fill
           priority
           sizes="100vw"
           className="hero-image"
         />
       </picture>
-      {videoSrc && <HeroVideo src={videoSrc} />}
+      {videoSrc && <HeroVideo src={videoSrc} locale={locale} />}
       <div className="hero-overlay" />
       <div className="hero-content page-shell">
         <p className="eyebrow light">{eyebrow}</p>

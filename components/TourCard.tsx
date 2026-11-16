@@ -25,7 +25,7 @@ export function TourCard({ locale, destination, cta, contact, details }: TourCar
         <p className="tour-eyebrow">{destination.region}</p>
         <h3>{destination.title}</h3>
         <p>{destination.summary}</p>
-        <div className="tour-tags" aria-label="Destination highlights">
+        <div className="tour-tags" aria-label={locale === "es" ? "Lo más destacado del destino" : "Destination highlights"}>
           {destination.bestFor.slice(0, 3).map((tag) => (
             <span key={tag}>{tag}</span>
           ))}

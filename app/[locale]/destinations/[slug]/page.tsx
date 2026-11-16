@@ -22,7 +22,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   if (!locales.includes(locale as Locale)) notFound();
   const destination = getDestination(locale, slug);
   if (!destination) notFound();
-  return pageMetadata(destination);
+  return pageMetadata(destination, locale as Locale);
 }
 
 export default async function DestinationDetailPage({ params }: { params: Promise<{ locale: string; slug: string }> }) {
@@ -36,7 +36,7 @@ export default async function DestinationDetailPage({ params }: { params: Promis
 
   return (
     <main>
-      <StructuredData data={pageStructuredData(destination)} />
+      <StructuredData data={pageStructuredData(destination, locale)} />
       <Header locale={locale} labels={dictionary.nav} currentSlug={slug} />
 
       <section className="destination-hero">

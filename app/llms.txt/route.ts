@@ -13,7 +13,7 @@ export function GET() {
     `- Website: ${absoluteUrl("/en")}`,
     `- Email: ${CONTACT_EMAIL}`,
     ...PHONE_CONTACTS.map((phone) => `- ${phone.country}: ${phone.label}`),
-    "- Published page content is currently in English, including the /es URL aliases.",
+    "- Languages: English (/en) and Spanish (/es). Each page links to its translated counterpart.",
     "",
     "## Destinations",
     "",
@@ -22,6 +22,11 @@ export function GET() {
     "## Concierge services",
     "",
     ...dictionary.concierge.services.map((service) => `- [${service.title}](${absoluteUrl("/en#concierge")}): ${service.description}`),
+    "",
+    "## Español",
+    "",
+    `- [Inicio](${absoluteUrl("/es")})`,
+    ...getDictionary("es").destinations.map((destination) => `- [${destination.title}](${absoluteUrl(`/es/destinations/${destination.slug}`)}): ${destination.summary}`),
     "",
     `- [Sitemap](${absoluteUrl("/sitemap.xml")})`
   ];

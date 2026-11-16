@@ -17,7 +17,7 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
   if (!locales.includes(locale as Locale)) notFound();
-  return pageMetadata();
+  return pageMetadata(undefined, locale as Locale);
 }
 
 export default async function HomePage({ params }: { params: Promise<{ locale: string }> }) {
@@ -28,7 +28,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
 
   return (
     <main>
-      <StructuredData data={pageStructuredData()} />
+      <StructuredData data={pageStructuredData(undefined, locale)} />
       <Header locale={locale} labels={dictionary.nav} />
       <Hero
         locale={locale}

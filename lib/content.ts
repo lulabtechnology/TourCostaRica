@@ -1,4 +1,5 @@
 import { BRAND_NAME } from "@/lib/brand";
+import { createSpanishDictionary } from "@/lib/content-es";
 
 export const locales = ["en", "es"] as const;
 export type Locale = (typeof locales)[number];
@@ -520,7 +521,7 @@ const englishDictionary: Dictionary = {
 
 export const dictionaries: Record<Locale, Dictionary> = {
   en: englishDictionary,
-  es: { ...englishDictionary, locale: "es" }
+  es: createSpanishDictionary(englishDictionary)
 };
 
 export function getDictionary(locale: string): Dictionary {
@@ -532,8 +533,10 @@ export function getDestination(locale: string, slug: string): Destination | unde
 }
 
 export function whatsappLink(locale: Locale, subject?: string, number = WHATSAPP_NUMBER) {
-  const text = subject
-    ? `Hello! I want more information about ${subject}.`
-    : "Hello! I need help planning my Costa Rica experience.";
+  const text = locale === "es"
+    ? subject ? `¡Hola! Quisiera más información sobre ${subject}.` : "¡Hola! Necesito ayuda para planificar mi viaje a Costa Rica."
+    : subject
+      ? `Hello! I want more information about ${subject}.`
+      : "Hello! I need help planning my Costa Rica experience.";
   return `https://wa.me/${number}?text=${encodeURIComponent(text)}`;
 }

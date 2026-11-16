@@ -6,7 +6,7 @@ Landing page de viajes y servicios concierge en Costa Rica, construida con Next.
 
 - `/en` landing principal
 - `/en/destinations/[slug]` detalle de cada destino
-- `/es` y `/es/destinations/[slug]` rutas alternativas con el contenido actual en inglés
+- `/es` y `/es/destinations/[slug]` versión completa en español; el selector de idioma conserva el destino actual
 
 ## Desarrollo local
 

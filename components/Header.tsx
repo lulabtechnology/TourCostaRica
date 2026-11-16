@@ -16,7 +16,8 @@ type HeaderProps = {
 };
 
 export function Header({ locale, labels, currentSlug }: HeaderProps) {
-  const languageHref = currentSlug ? `/en/destinations/${currentSlug}` : "/en";
+  const otherLocale = locale === "en" ? "es" : "en";
+  const languageHref = currentSlug ? `/${otherLocale}/destinations/${currentSlug}` : `/${otherLocale}`;
 
   return (
     <header className="site-header">
@@ -24,7 +25,7 @@ export function Header({ locale, labels, currentSlug }: HeaderProps) {
         <BrandLogo />
       </Link>
 
-      <nav className="nav-links" aria-label="Main navigation">
+      <nav className="nav-links" aria-label={locale === "es" ? "Navegación principal" : "Main navigation"}>
         <Link href={`/${locale}`}>{labels.home}</Link>
         <Link href={`/${locale}#destinations`}>{labels.tours}</Link>
         <Link href={`/${locale}#concierge`}>{labels.concierge}</Link>
@@ -32,8 +33,8 @@ export function Header({ locale, labels, currentSlug }: HeaderProps) {
       </nav>
 
       <div className="header-actions">
-        <Link className="language-switch" href={languageHref} aria-label="English version">
-          EN
+        <Link className="language-switch" href={languageHref} hrefLang={otherLocale} lang={otherLocale} aria-label={otherLocale === "es" ? "Versión en español" : "English version"}>
+          {otherLocale.toUpperCase()}
         </Link>
         <a className="header-whatsapp" href={whatsappLink(locale)} target="_blank" rel="noreferrer">
           {labels.whatsapp}

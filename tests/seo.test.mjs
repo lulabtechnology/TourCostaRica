@@ -36,12 +36,15 @@ test('approved content remains byte-for-byte identical apart from media and SEO 
 });
 
 test('all pages share the correct brand, canonical domain and existing social image', async () => {
-  for (const destination of [undefined, ...content.getDictionary('en').destinations]) {
-    const metadata = seo.pageMetadata(destination);
+  for (const locale of ['en', 'es']) for (const destination of [undefined, ...content.getDictionary(locale).destinations]) {
+    const metadata = seo.pageMetadata(destination, locale);
     assert.ok(metadata.title.absolute.includes(brand.BRAND_NAME));
     assert.ok(!metadata.title.absolute.includes('Adventures'));
-    const expected = `${brand.SITE_URL}/en${destination ? `/destinations/${destination.slug}` : ''}`;
+    const expected = `${brand.SITE_URL}/${locale}${destination ? `/destinations/${destination.slug}` : ''}`;
     assert.equal(metadata.alternates.canonical, expected);
+    assert.equal(metadata.alternates.languages[locale], expected);
+    assert.equal(metadata.alternates.languages['x-default'], `${brand.SITE_URL}/en${destination ? `/destinations/${destination.slug}` : ''}`);
+    assert.equal(metadata.openGraph.locale, locale === 'es' ? 'es_CR' : 'en_US');
     assert.equal(metadata.openGraph.url, expected);
     assert.equal(metadata.openGraph.siteName, brand.BRAND_NAME);
     assert.equal(metadata.twitter.card, 'summary_large_image');
@@ -58,8 +61,8 @@ test('all pages share the correct brand, canonical domain and existing social im
 });
 
 test('structured data uses existing contact details, services and destination facts', () => {
-  for (const destination of [undefined, ...content.getDictionary('en').destinations]) {
-    const data = seo.pageStructuredData(destination);
+  for (const locale of ['en', 'es']) for (const destination of [undefined, ...content.getDictionary(locale).destinations]) {
+    const data = seo.pageStructuredData(destination, locale);
     assert.equal(data['@context'], 'https://schema.org');
     const organization = data['@graph'].find(item => item['@type'] === 'Organization');
     assert.equal(organization.name, brand.BRAND_NAME);
@@ -67,6 +70,7 @@ test('structured data uses existing contact details, services and destination fa
     assert.equal(organization.contactPoint.length, content.PHONE_CONTACTS.length);
     assert.equal(organization.address, undefined);
     assert.equal(organization.aggregateRating, undefined);
+    assert.equal(data['@graph'].find(item => ['WebPage', 'CollectionPage'].includes(item['@type'])).inLanguage, locale);
     if (destination) {
       const entity = data['@graph'].find(item => item['@type'] === 'TouristDestination');
       assert.equal(entity.description, destination.summary);
@@ -76,6 +80,48 @@ test('structured data uses existing contact details, services and destination fa
       assert.equal(data['@graph'].find(item => item['@type'] === 'ItemList').itemListElement.length, 8);
       assert.equal(data['@graph'].filter(item => item['@type'] === 'Service').length, 3);
     }
+  }
+});
+
+test('Spanish translates every content field and retains all destination sections and questions', () => {
+  const english = content.getDictionary('en');
+  const spanish = content.getDictionary('es');
+  const properNames = new Set(['WhatsApp', 'Costa Rica', 'Arenal', 'Guanacaste', 'Manuel Antonio', 'Uvita', 'Puerto Jiménez', 'Tortuguero', 'Nosara', 'Las Catalinas', 'Playa Flamingo', 'Playa Conchal', 'Tamarindo', 'Santa Teresa', 'Punta Catedral', 'Playa Hermosa', 'Playa San Josecito', 'Puerto Viejo de Talamanca', 'Playa Cocles', 'Playa Punta Uva', 'Playa Chiquita', 'Playa Negra']);
+  function compare(en, es, location = 'dictionary') {
+    if (Array.isArray(en)) {
+      assert.equal(es.length, en.length, `${location}: missing translated items`);
+      en.forEach((item, index) => compare(item, es[index], `${location}.${index}`));
+    } else if (en && typeof en === 'object') {
+      assert.equal(Object.keys(es).length, Object.keys(en).length, `${location}: mismatched fields`);
+      for (const key of Object.keys(en)) {
+        assert.ok(Object.hasOwn(es, key), `${location}.${key}: missing field`);
+        if (!['locale', 'slug', 'image', 'kind'].includes(key)) compare(en[key], es[key], `${location}.${key}`);
+        else if (key !== 'locale') assert.equal(es[key], en[key], `${location}.${key}: changed media or routing`);
+      }
+    } else if (typeof en === 'string') {
+      assert.ok(typeof es === 'string' && es.trim().length, `${location}: empty translation`);
+      if (!properNames.has(en)) assert.notEqual(es, en, `${location}: untranslated English text`);
+    }
+  }
+  compare(english, spanish);
+  assert.equal(spanish.destinations.length, 8);
+});
+
+test('WhatsApp messages match the chosen language and keep the original English wording', () => {
+  const message = (locale, subject) => new URL(content.whatsappLink(locale, subject)).searchParams.get('text');
+  assert.equal(message('en'), 'Hello! I need help planning my Costa Rica experience.');
+  assert.equal(message('en', 'Arenal'), 'Hello! I want more information about Arenal.');
+  assert.equal(message('es'), '¡Hola! Necesito ayuda para planificar mi viaje a Costa Rica.');
+  assert.equal(message('es', 'Bahía Drake'), '¡Hola! Quisiera más información sobre Bahía Drake.');
+});
+
+test('sitemap indexes all 18 translated pages with reciprocal language alternatives', () => {
+  const entries = load('app/sitemap.ts').default();
+  assert.equal(entries.length, 18);
+  assert.equal(new Set(entries.map(entry => entry.url)).size, 18);
+  for (const entry of entries) {
+    assert.ok(entry.alternates.languages.en.includes('/en'));
+    assert.ok(entry.alternates.languages.es.includes('/es'));
   }
 });
 

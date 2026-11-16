@@ -39,9 +39,12 @@ datos existentes. El JSON-LD describe Organization, WebSite, CollectionPage,
 Service, TouristDestination, TouristAttraction y BreadcrumbList cuando aplica.
 No incluye direcciones, valoraciones, premios ni información comercial inventada.
 
-Las rutas `/es` conservan el contenido inglés aprobado y canonicalizan a su
-equivalente `/en`. Solo las nueve páginas canónicas aparecen en el sitemap.
-Agregar hreflang español únicamente cuando exista una traducción aprobada.
+Las rutas `/en` conservan íntegramente el contenido inglés aprobado. Las rutas
+`/es` incluyen una traducción completa de portada, servicios, ocho destinos,
+preguntas y mensajes de WhatsApp. El selector EN/ES conserva el destino actual.
+Cada idioma tiene canonical propio, HTML lang correcto y hreflang recíproco,
+con inglés como x-default. Las 18 páginas aparecen en el sitemap. También hay
+tarjetas sociales y datos estructurados en el idioma de cada página.
 
 Estas medidas facilitan rastreo e identificación de la marca. No garantizan
 posiciones ni menciones en respuestas de IA; `llms.txt` es un índice auxiliar.
