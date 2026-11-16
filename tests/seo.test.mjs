@@ -46,6 +46,7 @@ test('all pages share the correct brand, canonical domain and existing social im
     assert.equal(metadata.openGraph.siteName, brand.BRAND_NAME);
     assert.equal(metadata.twitter.card, 'summary_large_image');
     for (const image of metadata.openGraph.images) {
+      assert.equal(new URL(image.url).origin, brand.ASSET_ORIGIN);
       const file = path.join('public', new URL(image.url).pathname);
       const dimensions = await sharp(file).metadata();
       assert.equal(dimensions.width, 1200);

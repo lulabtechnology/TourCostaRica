@@ -44,8 +44,11 @@ Agregar hreflang español únicamente cuando exista una traducción aprobada.
 Estas medidas facilitan rastreo e identificación de la marca. No garantizan
 posiciones ni menciones en respuestas de IA; `llms.txt` es un índice auxiliar.
 
-La conexión DNS del dominio y su certificado deben estar operativos para que
-los robots externos puedan descargar las tarjetas sociales desde el dominio.
+Las tarjetas sociales y los assets de datos estructurados usan el host público
+estable de Vercel como CDN. De este modo se pueden descargar incluso antes de
+conectar el dominio nuevo. Los enlaces canónicos, la entidad y el sitemap usan
+siempre el dominio de la marca. La conexión DNS y el certificado deben estar
+operativos para visitar la web a través del dominio nuevo.
 Las vistas previas guardadas por aplicaciones externas pueden tardar en
 actualizarse después de publicar. El sitio no controla esa caché.
 

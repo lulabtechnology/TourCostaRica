@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { BRAND_MARK, BRAND_NAME, SHARE_IMAGE, SITE_URL, absoluteUrl } from "@/lib/brand";
+import { BRAND_MARK, BRAND_NAME, SHARE_IMAGE, SITE_URL, absoluteUrl, assetUrl } from "@/lib/brand";
 import { CONTACT_EMAIL, PHONE_CONTACTS, type Destination, getDictionary } from "@/lib/content";
 
 // Both URL prefixes currently contain the same English copy. Index the English
@@ -26,13 +26,13 @@ export function pageMetadata(destination?: Destination): Metadata {
       title,
       description,
       url: absoluteUrl(path),
-      images: [{ url: absoluteUrl(image), width: 1200, height: 630, type: "image/jpeg", alt: destination ? `${destination.title}, Costa Rica — ${BRAND_NAME}` : BRAND_NAME }]
+      images: [{ url: assetUrl(image), width: 1200, height: 630, type: "image/jpeg", alt: destination ? `${destination.title}, Costa Rica — ${BRAND_NAME}` : BRAND_NAME }]
     },
     twitter: {
       card: "summary_large_image",
       title,
       description,
-      images: [absoluteUrl(image)]
+      images: [assetUrl(image)]
     }
   };
 }
@@ -51,8 +51,8 @@ export function pageStructuredData(destination?: Destination) {
       name: BRAND_NAME,
       url: absoluteUrl("/en"),
       description: dictionary.seo.description,
-      logo: { "@type": "ImageObject", url: absoluteUrl(BRAND_MARK), width: 512, height: 512 },
-      image: absoluteUrl(SHARE_IMAGE),
+      logo: { "@type": "ImageObject", url: assetUrl(BRAND_MARK), width: 512, height: 512 },
+      image: assetUrl(SHARE_IMAGE),
       email: CONTACT_EMAIL,
       areaServed: country,
       contactPoint: PHONE_CONTACTS.map((phone) => ({
@@ -83,7 +83,7 @@ export function pageStructuredData(destination?: Destination) {
       mainEntity: { "@id": destination ? `${url}#destination` : `${url}#destinations` },
       primaryImageOfPage: {
         "@type": "ImageObject",
-        url: absoluteUrl(destination?.image ?? "/images/hero-editorial-desktop.webp")
+        url: assetUrl(destination?.image ?? "/images/hero-editorial-desktop.webp")
       }
     }
   ];
@@ -96,7 +96,7 @@ export function pageStructuredData(destination?: Destination) {
         name: destination.title,
         description: destination.summary,
         url,
-        image: absoluteUrl(destination.image),
+        image: assetUrl(destination.image),
         containedInPlace: country,
         includesAttraction: destination.sections
           .filter((section) => section.kind === "attractions" || section.kind === "beaches")
@@ -120,7 +120,7 @@ export function pageStructuredData(destination?: Destination) {
         name: dictionary.tours.title,
         itemListElement: dictionary.destinations.map((item, index) => ({
           "@type": "ListItem", position: index + 1,
-          item: { "@type": "TouristDestination", name: item.title, url: absoluteUrl(`/en/destinations/${item.slug}`), description: item.summary, image: absoluteUrl(item.image) }
+          item: { "@type": "TouristDestination", name: item.title, url: absoluteUrl(`/en/destinations/${item.slug}`), description: item.summary, image: assetUrl(item.image) }
         }))
       },
       ...dictionary.concierge.services.map((service, index) => ({
@@ -129,7 +129,7 @@ export function pageStructuredData(destination?: Destination) {
         name: service.title.replace(/^\d+\.\s*/, ""),
         description: service.description,
         url: `${url}#concierge`,
-        image: absoluteUrl(service.image),
+        image: assetUrl(service.image),
         areaServed: country,
         provider: { "@id": organizationId }
       }))
