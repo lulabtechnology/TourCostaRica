@@ -1,4 +1,6 @@
 import Link from "next/link";
+import { BrandLogo } from "@/components/BrandLogo";
+import { BRAND_NAME } from "@/lib/brand";
 import { CONTACT_LINK, Locale, whatsappLink } from "@/lib/content";
 
 type HeaderProps = {
@@ -18,9 +20,8 @@ export function Header({ locale, labels, currentSlug }: HeaderProps) {
 
   return (
     <header className="site-header">
-      <Link className="brand" href={`/${locale}`} aria-label="Costa Rica Adventures">
-        <span className="brand-mark">CR</span>
-        <span className="brand-text">Costa Rica<br />Adventures</span>
+      <Link className="brand" href={`/${locale}`} aria-label={BRAND_NAME}>
+        <BrandLogo />
       </Link>
 
       <nav className="nav-links" aria-label="Main navigation">

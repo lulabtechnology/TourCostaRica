@@ -1,4 +1,4 @@
-# Costa Rica Adventures
+# Costa Rica Travel and Living
 
 Landing page de viajes y servicios concierge en Costa Rica, construida con Next.js, React y TypeScript.
 

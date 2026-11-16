@@ -1,0 +1,9 @@
+Crea un video cinematográfico fotorrealista para el fondo de portada de Costa Rica Travel and Living, una marca de viajes y servicios concierge en Costa Rica.
+
+Formato horizontal 16:9, 1920 × 1080 o superior, duración 8 segundos, 24 fps. Una única toma aérea suave, sin cortes: la cámara avanza muy lentamente siguiendo una costa del Pacífico costarricense, con una playa de arena dorada, selva tropical verde profundo y agua turquesa natural. Un promontorio cubierto de vegetación ocupa la mitad derecha; la mitad izquierda conserva una composición tranquila, con tonos oscuros naturales, para superponer el título blanco y el párrafo que ya existen en la web.
+
+Luz cálida de primera hora de la mañana, bruma ligera al fondo, olas pequeñas que llegan a la orilla, vegetación moviéndose sutilmente con la brisa. Estética de fotografía editorial de viajes de alta calidad: elegante, natural, auténtica y serena. Color realista, verdes profundos, arena cálida y azules contenidos. Perspectiva, agua, sombras y movimiento físicamente coherentes.
+
+La toma debe funcionar en bucle, con movimiento mínimo y sin saltos perceptibles entre el principio y el final. Mantén la costa y el horizonte estables para que también se pueda recortar al centro en móvil.
+
+Sin texto, sin tipografía, sin subtítulos, sin marcas de agua, sin logotipos, sin audio, sin música, sin voz, sin personas en primer plano, sin edificios ni vehículos. No inventes volcanes sobre la playa ni combines paisajes de distintos lugares. Evita saturación excesiva, aspecto 3D, movimientos rápidos, zoom brusco y transiciones. No imites la marca ni el contenido de otra empresa.

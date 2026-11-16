@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { BRAND_NAME } from "@/lib/brand";
 import { Locale, PHONE_CONTACTS, whatsappLink } from "@/lib/content";
 
 type FooterProps = {
@@ -12,7 +13,7 @@ export function Footer({ locale, tagline, rights }: FooterProps) {
     <footer className="footer" id="contact">
       <div className="page-shell footer-grid">
         <div>
-          <Link className="footer-brand" href={`/${locale}`}>Costa Rica Adventures</Link>
+          <Link className="footer-brand" href={`/${locale}`}>{BRAND_NAME}</Link>
           <p>{tagline}</p>
         </div>
         <div className="footer-contact">
@@ -27,7 +28,7 @@ export function Footer({ locale, tagline, rights }: FooterProps) {
         </div>
       </div>
       <div className="page-shell footer-bottom">
-        <small>© {new Date().getFullYear()} Costa Rica Adventures. {rights}</small>
+        <small>© {new Date().getFullYear()} {BRAND_NAME}. {rights}</small>
         <small className="footer-credit">
           {locale === "es" ? "Desarrollado por " : "Developed by "}
           <a href="https://lulabtech.com" target="_blank" rel="noopener">

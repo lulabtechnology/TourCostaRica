@@ -1,3 +1,5 @@
+import { BRAND_NAME } from "@/lib/brand";
+
 export const locales = ["en", "es"] as const;
 export type Locale = (typeof locales)[number];
 
@@ -79,14 +81,14 @@ export type Dictionary = {
 };
 
 const images = {
-  arenal: "/images/destination-arenal.webp",
-  guanacaste: "/images/destination-guanacaste.webp",
-  manuelAntonio: "/images/destination-manuel-antonio.webp",
-  uvita: "/images/destination-uvita.webp",
-  drakeBay: "/images/destination-drake-bay.webp",
-  puertoJimenez: "/images/destination-puerto-jimenez.webp",
-  tortuguero: "/images/destination-tortuguero.webp",
-  southCaribbean: "/images/destination-south-caribbean.webp"
+  arenal: "/images/destination-arenal-editorial.webp",
+  guanacaste: "/images/destination-guanacaste-editorial.webp",
+  manuelAntonio: "/images/destination-manuel-antonio-editorial.webp",
+  uvita: "/images/destination-uvita-editorial.webp",
+  drakeBay: "/images/destination-drake-bay-editorial.webp",
+  puertoJimenez: "/images/destination-puerto-jimenez-editorial.webp",
+  tortuguero: "/images/destination-tortuguero-editorial.webp",
+  southCaribbean: "/images/destination-south-caribbean-editorial.webp"
 };
 
 const generalQuestions = [
@@ -447,7 +449,7 @@ const conciergeServices: ConciergeService[] = [
 const englishDictionary: Dictionary = {
   locale: "en",
   seo: {
-    title: "Costa Rica Adventures | Travel & Concierge Services",
+    title: `${BRAND_NAME} | Travel & Concierge Services`,
     description: "Authentic Costa Rica destinations, activities, itinerary planning, real estate sourcing, relocation and lifestyle concierge services."
   },
   nav: {

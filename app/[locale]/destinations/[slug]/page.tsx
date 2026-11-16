@@ -4,6 +4,8 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
+import { StructuredData } from "@/components/StructuredData";
+import { pageMetadata, pageStructuredData } from "@/lib/seo";
 import { CONTACT_LINK, getDestination, getDictionary, Locale, locales, whatsappLink } from "@/lib/content";
 
 export function generateStaticParams() {
@@ -17,19 +19,15 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string; slug: string }> }): Promise<Metadata> {
   const { locale, slug } = await params;
+  if (!locales.includes(locale as Locale)) notFound();
   const destination = getDestination(locale, slug);
-  const dictionary = getDictionary(locale);
-
-  if (!destination) return dictionary.seo;
-
-  return {
-    title: `${destination.title} | ${dictionary.seo.title}`,
-    description: destination.summary
-  };
+  if (!destination) notFound();
+  return pageMetadata(destination);
 }
 
 export default async function DestinationDetailPage({ params }: { params: Promise<{ locale: string; slug: string }> }) {
   const { locale: rawLocale, slug } = await params;
+  if (!locales.includes(rawLocale as Locale)) notFound();
   const locale = (locales.includes(rawLocale as Locale) ? rawLocale : "en") as Locale;
   const dictionary = getDictionary(locale);
   const destination = getDestination(locale, slug);
@@ -38,11 +36,12 @@ export default async function DestinationDetailPage({ params }: { params: Promis
 
   return (
     <main>
+      <StructuredData data={pageStructuredData(destination)} />
       <Header locale={locale} labels={dictionary.nav} currentSlug={slug} />
 
       <section className="destination-hero">
         <Image
-          src={destination.image}
+          src={`/images/destination-${destination.slug}-wide.webp`}
           alt={`${destination.title} Costa Rica`}
           fill
           priority

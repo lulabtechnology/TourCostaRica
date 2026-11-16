@@ -1,4 +1,7 @@
 import type { Metadata } from "next";
+import { notFound } from "next/navigation";
+import { StructuredData } from "@/components/StructuredData";
+import { pageMetadata, pageStructuredData } from "@/lib/seo";
 import { ConciergeSection } from "@/components/ConciergeSection";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
@@ -13,21 +16,19 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
-  const dictionary = getDictionary(locale);
-
-  return {
-    title: dictionary.seo.title,
-    description: dictionary.seo.description
-  };
+  if (!locales.includes(locale as Locale)) notFound();
+  return pageMetadata();
 }
 
 export default async function HomePage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale: rawLocale } = await params;
+  if (!locales.includes(rawLocale as Locale)) notFound();
   const locale = (locales.includes(rawLocale as Locale) ? rawLocale : "en") as Locale;
   const dictionary = getDictionary(locale);
 
   return (
     <main>
+      <StructuredData data={pageStructuredData()} />
       <Header locale={locale} labels={dictionary.nav} />
       <Hero
         locale={locale}

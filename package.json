@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "test": "node --test tests/seo.test.mjs",
     "start": "next start",
     "lint": "echo \"No lint configured\""
   },
