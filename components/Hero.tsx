@@ -22,9 +22,9 @@ export function Hero({ locale, eyebrow, title, subtitle, primary, secondary }: H
   return (
     <section className="hero" aria-label={locale === "es" ? "Portada de Costa Rica" : "Costa Rica hero image"}>
       <picture className="hero-picture">
-        <source media="(max-width: 760px)" srcSet="/images/hero-editorial-mobile.webp" />
+        <source media="(max-width: 760px)" srcSet="/images/hero-video-poster-mobile.webp" />
         <Image
-          src="/images/hero-editorial-desktop.webp"
+          src="/images/hero-video-poster-desktop.webp"
           alt={locale === "es" ? "Selva tropical, costa y naturaleza de Costa Rica" : "Costa Rica rainforest, coastline and nature"}
           fill
           priority

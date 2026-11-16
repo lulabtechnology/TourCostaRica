@@ -11,8 +11,8 @@ export function pageMetadata(destination?: Destination, locale: Locale = "en"): 
     : dictionary.seo.title;
   const description = destination?.summary ?? dictionary.seo.description;
   const image = destination
-    ? `/images/social/${locale === "es" ? "es/" : ""}${destination.slug}.jpg`
-    : locale === "es" ? "/brand/costa-rica-travel-and-living-share-es.jpg" : SHARE_IMAGE;
+    ? `/images/social/photographic/${locale === "es" ? "es/" : ""}${destination.slug}.jpg`
+    : locale === "es" ? "/brand/costa-rica-travel-and-living-share-v2-es.jpg" : SHARE_IMAGE;
 
   return {
     title: { absolute: title },
@@ -102,7 +102,7 @@ export function pageStructuredData(destination?: Destination, locale: Locale = "
       mainEntity: { "@id": destination ? `${url}#destination` : `${url}#destinations` },
       primaryImageOfPage: {
         "@type": "ImageObject",
-        url: assetUrl(destination?.image ?? "/images/hero-editorial-desktop.webp")
+        url: assetUrl(destination?.image ?? "/images/hero-video-poster-desktop.webp")
       }
     }
   ];

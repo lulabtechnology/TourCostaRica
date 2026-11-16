@@ -8,13 +8,17 @@ medios, metadatos y mecanismos técnicos de descubrimiento.
 
 - `public/brand/costa-rica-travel-and-living-mark.png`: emblema transparente, 512 × 512.
 - `public/brand/costa-rica-travel-and-living-logo.png`: firma horizontal transparente.
-- `public/brand/costa-rica-travel-and-living-share.jpg`: tarjeta social principal, 1200 × 630.
-- `public/images/social/*.jpg`: ocho tarjetas sociales por destino, 1200 × 630.
+- `public/brand/costa-rica-travel-and-living-share-v2*.jpg`: tarjetas sociales principales, 1200 × 630, en ambos idiomas.
+- `public/images/social/photographic/`: tarjetas sociales por destino e idioma, 1200 × 630.
 - `app/favicon.ico`, `public/apple-touch-icon.png`, `public/brand/icon-*.png`: iconos.
-- `public/images/*-editorial.webp`: hero y portadas optimizados; las versiones `*-wide.webp` son para las cabeceras de detalle.
+- `public/images/*-photographic.webp`: portadas fotográficas con referencia visual; las versiones `*-photographic-wide.webp` son para las cabeceras de detalle.
+- `public/images/hero-video-poster-*.webp`: fotogramas del video aprobado, usados durante la carga o como imagen alternativa.
 
-El emblema, el hero y las ocho imágenes nuevas se generaron con la herramienta
-integrada de generación de imágenes. Son representaciones visuales generadas,
+El emblema y las ocho portadas se generaron con la herramienta integrada de
+generación de imágenes. La revisión fotográfica usa imágenes adjuntas de
+Traslados Panamá como referencia de color, iluminación y detalle, y referencias
+geográficas de Visit Costa Rica cuando se indican. Los prompts y fuentes están
+en `photo-prompts-v2.json`. Son representaciones visuales generadas,
 no fotografías documentales ni pruebas de una propiedad, un operador o una
 experiencia concreta. No se copiaron assets de la web de referencia.
 

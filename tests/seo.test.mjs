@@ -128,9 +128,9 @@ test('sitemap indexes all 18 translated pages with reciprocal language alternati
 test('all destination and responsive hero assets exist and the brand emblem has transparency', async () => {
   for (const destination of content.getDictionary('en').destinations) {
     assert.ok(fs.existsSync(path.join('public', destination.image)));
-    assert.ok(fs.existsSync(`public/images/destination-${destination.slug}-wide.webp`));
+    assert.ok(fs.existsSync(path.join('public', destination.image.replace(/\.webp$/, '-wide.webp'))));
   }
-  for (const format of ['desktop', 'mobile']) assert.ok(fs.existsSync(`public/images/hero-editorial-${format}.webp`));
+  for (const format of ['desktop', 'mobile']) assert.ok(fs.existsSync(`public/images/hero-video-poster-${format}.webp`));
   const emblem = await sharp(path.join('public', brand.BRAND_MARK)).metadata();
   assert.equal(emblem.hasAlpha, true);
   assert.equal(emblem.width, 512);

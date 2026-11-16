@@ -82,14 +82,14 @@ export type Dictionary = {
 };
 
 const images = {
-  arenal: "/images/destination-arenal-editorial.webp",
-  guanacaste: "/images/destination-guanacaste-editorial.webp",
-  manuelAntonio: "/images/destination-manuel-antonio-editorial.webp",
-  uvita: "/images/destination-uvita-editorial.webp",
-  drakeBay: "/images/destination-drake-bay-editorial.webp",
-  puertoJimenez: "/images/destination-puerto-jimenez-editorial.webp",
-  tortuguero: "/images/destination-tortuguero-editorial.webp",
-  southCaribbean: "/images/destination-south-caribbean-editorial.webp"
+  arenal: "/images/destination-arenal-photographic.webp",
+  guanacaste: "/images/destination-guanacaste-photographic.webp",
+  manuelAntonio: "/images/destination-manuel-antonio-photographic.webp",
+  uvita: "/images/destination-uvita-photographic.webp",
+  drakeBay: "/images/destination-drake-bay-photographic.webp",
+  puertoJimenez: "/images/destination-puerto-jimenez-photographic.webp",
+  tortuguero: "/images/destination-tortuguero-photographic.webp",
+  southCaribbean: "/images/destination-south-caribbean-photographic.webp"
 };
 
 const generalQuestions = [

@@ -41,7 +41,7 @@ export default async function DestinationDetailPage({ params }: { params: Promis
 
       <section className="destination-hero">
         <Image
-          src={`/images/destination-${destination.slug}-wide.webp`}
+          src={destination.image.replace(/\.webp$/, "-wide.webp")}
           alt={`${destination.title} Costa Rica`}
           fill
           priority
